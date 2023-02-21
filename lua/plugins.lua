@@ -8,23 +8,23 @@ local configs = {
             'nvim-tree/nvim-web-devicons', 
             opt = true
         },
-        config = true
+--        config = true
     },
 
     {
         "loctvl842/monokai-pro.nvim",
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
-        config = function()
-            -- load the colorscheme here
-            require("monokai-pro").setup()
-            local colorscheme = "monokai-pro"
-            local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-            if not status_ok then
-                vim.notify("colorscheme " .. colorscheme .. " 没有找到！")
-                return
-            end
-        end,
+        lazy = true, -- make sure we load this during startup if it is your main colorscheme
+        priority = 1, -- make sure to load this before all the other start plugins
+        --config = function()
+            ---- load the colorscheme here
+            --require("monokai-pro").setup()
+            --local colorscheme = "monokai-pro"
+            --local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+            --if not status_ok then
+                --vim.notify("colorscheme " .. colorscheme .. " 没有找到！")
+                --return
+            --end
+        --end,
     },
 
     {
@@ -162,7 +162,31 @@ local configs = {
 
     {
         "mrjones2014/nvim-ts-rainbow",
+    },
+
+    {
+        'uloco/bluloco.nvim',
+        dependencies = { 'rktjmp/lush.nvim' },
+        lazy = false, -- make sure we load this during startup if it is your main colorscheme
+        priority = 1000, -- make sure to load this before all the other start plugins
+        config = function()
+            -- load the colorscheme here
+            require("bluloco").setup({
+                style = "auto",               -- "auto" | "dark" | "light"
+                transparent = false,
+                italics = false,
+                terminal = vim.fn.has("gui_running") == 1, -- bluoco colors are enabled in gui terminals per default.
+                guicursor   = true,
+            })
+            local colorscheme = "bluloco"
+            local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+            if not status_ok then
+                vim.notify("colorscheme " .. colorscheme .. " 没有找到！")
+                return
+            end
+        end,
     }
+
 }
 
 local opts = {}
